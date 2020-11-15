@@ -1,4 +1,4 @@
-FROM ruby:2.6.0-alpine
+FROM ruby:2.7.0-alpine
 
 WORKDIR /app
 COPY Gemfile /app
@@ -23,9 +23,14 @@ RUN apk update && \
     apk add --virtual build-packs --no-cache \
         build-base \
         curl-dev && \
-    gem install bundler && \
+    gem install bundler rb-readline && \
     bundle install && \
     apk del build-packs
+
+# Add a script to be executed every time the container starts.
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["sh", "/usr/bin/entrypoint.sh"]
 EXPOSE 3000
 
 CMD ["rails", "server", "-b", "0.0.0.0"]
