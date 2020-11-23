@@ -14,12 +14,10 @@ RUN apk update && \
         libxml2-dev \
         linux-headers \
         make \
-        nodejs \
         mysql \
         mysql-dev \
         mysql-client \
-        tzdata \
-        yarn && \
+        tzdata && \
     apk add --virtual build-packs --no-cache \
         build-base \
         curl-dev && \
