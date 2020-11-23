@@ -5,4 +5,8 @@ Rails.application.routes.draw do
       resources :posts
     end
   end
+
+  namespace 'api' do
+    resources :items
+  end
 end
